@@ -24,98 +24,118 @@ public class Words {
 	    }
 	    // Obtaining the special word to look for.
 	    //System.out.println("And now the word we are looking for:");
-	   String word = input.nextLine();
-	   String[] aryWord = word.split("");
-	   
-	   //Looking for the word/words
+		String word = input.nextLine();
+		String[] aryWord = word.split("");
+	    int length = aryWord.length;
+		//Looking for the word/words
 	   
 	    //Scanning for the first char of the word if found
-	   //Scanning all directions for the word by the 2ht char of the word
-	   int countWords = 0;
-	   for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < cols; j++) {
-			if (mTable[i][j].equals(aryWord[0])) {
-				
-				//Checking top side
-				try {
-					if (mTable[i-1][j].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i-chr][j].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-					}
-				 //Checking the right top corner side
-				   if (mTable[i-1][j+1].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i-chr][j+chr].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				  //Checking the right side  
-				   if (mTable[i][j+1].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i][j+chr].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				   
-				//Checking the bottom right side  
-				   if (mTable[i+1][j+1].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i+chr][j+chr].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				 //Checking bottom side
-				   if (mTable[i+1][j].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i+chr][j].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				 //Checking bottom left side
-				   if (mTable[i+1][j-1].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i+chr][j-chr].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				 //Checking left side
-				   if (mTable[i][j-1].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i][j-chr].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				 //Checking top left side
-				   if (mTable[i-1][j-1].equals(aryWord[1])) {
-						for (int chr = 2;  chr < aryWord.length; chr++) {
-							if (mTable[i-chr][j-chr].equals(aryWord[chr])) {
-								if ((chr - (aryWord.length - 1)) == 0) {
-									countWords++;								}
-							}
-						}
-				 }
-				} catch (Exception e) {
-					System.out.println("Vlezee");			
+		//Scanning all directions for the word by the 2ht char of the word
+		int countWords = 0;
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				if (mTable[row][col].equals(aryWord[0])) {
+					
+					//Checking top side
+				  if (row > 0 && mTable[row-1][col].equals(aryWord[1])) {
+	
+					 for (int chr = 1;  chr < aryWord.length; chr++) {
+						if (row-chr >= 0 && mTable[row-chr][col].equals(aryWord[chr])) {
+							if(chr + 1 == length){
+						        countWords++;
+						        break;
+						    }
+						}	
+				    }
 				}
-			}
-		}
+				  //Checking top right side
+				  if (row > 0 && col < mTable[col].length - 1 && mTable[row-1][col+1].equals(aryWord[1])) {
+						
+						 for (int chr = 1;  chr < aryWord.length; chr++) {
+							if (row-chr >= 0 && mTable[row-chr][col+chr].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+				  //Checking right side
+				  if ( col < mTable[col].length - 1 && mTable[row][col+1].equals(aryWord[1])) {
+						
+						 for (int chr = 0;  chr < aryWord.length; chr++) {
+							if (col + chr <= mTable[col].length && mTable[row][col+chr].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+				 //Checking bottom right side
+				  if ( col < mTable[col].length - 1 && row < mTable[row].length-1 && mTable[row+1][col+1].equals(aryWord[1])) {
+						
+						 for (int chr = 0;  chr < aryWord.length; chr++) {
+							if (col + chr <= mTable[col].length && row + chr < mTable[row].length&& mTable[row+chr][col+chr].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+				//Checking the bottom side
+				  if (row < mTable[row].length && mTable[row+1][col].equals(aryWord[1])) {
+						
+						 for (int chr = 0;  chr < aryWord.length; chr++) {
+							if (row + chr <= mTable[row].length && mTable[row+chr][col].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+				//Checking bottom left side
+				  if (row < mTable[row].length && col > 0 && mTable[row+1][col-1].equals(aryWord[1])) {
+						
+						 for (int chr = 0;  chr < aryWord.length; chr++) {
+							if (row + chr <= mTable[row].length && col - chr >= 0 && mTable[row+chr][col-chr].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+				//Checking left side
+				  if ( col > 0 && mTable[row][col-1].equals(aryWord[1])) {
+						
+						 for (int chr = 0;  chr < aryWord.length; chr++) {
+							if (col - chr <= mTable[col].length && mTable[row][col-chr].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+				//Checking top left side
+				  if ( col > 0 && row > 0 && mTable[row-1][col-1].equals(aryWord[1])) {
+						
+						 for (int chr = 0;  chr < aryWord.length; chr++) {
+							if (col - chr >= 0 && row-chr >= 0 && mTable[row-chr][col-chr].equals(aryWord[chr])) {
+								if(chr + 1 == length){
+							        countWords++;
+							        break;
+							    }
+							}	
+					    }
+					}
+		      } 
+		  }
 	   }
 	   System.out.println(countWords);
+	   input.close();
 	}
 }
