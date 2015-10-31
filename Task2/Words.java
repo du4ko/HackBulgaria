@@ -49,7 +49,7 @@ public class Words {
 				    }
 				}
 				  //Checking top right side
-				  if (row > 0 && col < mTable[col].length - 1 && mTable[row-1][col+1].equals(aryWord[1])) {
+				  if (row > 0 && (col + 1) < mTable[row].length && mTable[row-1][col+1].equals(aryWord[1])) {
 						
 						 for (int chr = 1;  chr < aryWord.length; chr++) {
 							if (row-chr >= 0 && mTable[row-chr][col+chr].equals(aryWord[chr])) {
@@ -61,10 +61,10 @@ public class Words {
 					    }
 					}
 				  //Checking right side
-				  if ( col < mTable[col].length - 1 && mTable[row][col+1].equals(aryWord[1])) {
+				  if ( col + 1 < mTable[row].length && mTable[row][col+1].equals(aryWord[1])) {
 						
-						 for (int chr = 0;  chr < aryWord.length; chr++) {
-							if (col + chr <= mTable[col].length && mTable[row][col+chr].equals(aryWord[chr])) {
+						 for (int chr = 1;  chr < aryWord.length; chr++) {
+							if (col + chr <= mTable[row].length - 1 && mTable[row][col+chr].equals(aryWord[chr])) {
 								if(chr + 1 == length){
 							        countWords++;
 							        break;
@@ -73,10 +73,10 @@ public class Words {
 					    }
 					}
 				 //Checking bottom right side
-				  if ( col < mTable[col].length - 1 && row < mTable[row].length-1 && mTable[row+1][col+1].equals(aryWord[1])) {
+				  if ( col + 1 < mTable[row].length && row + 1 < mTable.length && mTable[row+1][col+1].equals(aryWord[1])) {
 						
 						 for (int chr = 0;  chr < aryWord.length; chr++) {
-							if (col + chr <= mTable[col].length && row + chr < mTable[row].length&& mTable[row+chr][col+chr].equals(aryWord[chr])) {
+							if (col + chr <= mTable.length && row + chr < mTable[row].length&& mTable[row+chr][col+chr].equals(aryWord[chr])) {
 								if(chr + 1 == length){
 							        countWords++;
 							        break;
@@ -85,10 +85,10 @@ public class Words {
 					    }
 					}
 				//Checking the bottom side
-				  if (row < mTable[row].length && mTable[row+1][col].equals(aryWord[1])) {
+				  if (row + 1 < mTable.length && mTable[row+1][col].equals(aryWord[1])) {
 						
 						 for (int chr = 0;  chr < aryWord.length; chr++) {
-							if (row + chr <= mTable[row].length && mTable[row+chr][col].equals(aryWord[chr])) {
+							if (row + chr <= mTable[row].length - 1&& mTable[row+chr][col].equals(aryWord[chr])) {
 								if(chr + 1 == length){
 							        countWords++;
 							        break;
@@ -97,10 +97,10 @@ public class Words {
 					    }
 					}
 				//Checking bottom left side
-				  if (row < mTable[row].length && col > 0 && mTable[row+1][col-1].equals(aryWord[1])) {
+				  if (row < mTable[row].length -1 && col > 0 && mTable[row+1][col-1].equals(aryWord[1])) {
 						
 						 for (int chr = 0;  chr < aryWord.length; chr++) {
-							if (row + chr <= mTable[row].length && col - chr >= 0 && mTable[row+chr][col-chr].equals(aryWord[chr])) {
+							if (row + chr <= mTable[row].length - 1 && col - chr >= 0 && mTable[row+chr][col-chr].equals(aryWord[chr])) {
 								if(chr + 1 == length){
 							        countWords++;
 							        break;
@@ -112,7 +112,7 @@ public class Words {
 				  if ( col > 0 && mTable[row][col-1].equals(aryWord[1])) {
 						
 						 for (int chr = 0;  chr < aryWord.length; chr++) {
-							if (col - chr <= mTable[col].length && mTable[row][col-chr].equals(aryWord[chr])) {
+							if (col - chr >= 0 && mTable[row][col-chr].equals(aryWord[chr])) {
 								if(chr + 1 == length){
 							        countWords++;
 							        break;
